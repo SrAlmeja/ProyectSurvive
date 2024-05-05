@@ -17,7 +17,7 @@ public class LevelSystem : MonoBehaviour
         if (Instance != null && Instance != this)
         {
             Destroy(this.gameObject);
-            Debug.LogWarning("Mas controladores de tipo Scenetransition se han encontrado en la escena");
+            Debug.LogWarning("Mas controladores de tipo LevelSystem se han encontrado en la escena");
             return;
         }
 
