@@ -65,12 +65,22 @@ public class PlayerInputManager : MonoBehaviour
     {
         _playerInputActions.Player.Disable();
     }
-    
+
     private void FixedUpdate()
     {
-        Vector3 movementDirection = _movement.x * transform.right + _movement.y * transform.forward;
-        _rigidbody.AddForce(movementDirection.normalized * (_playerController.Speed - _croachSpeed));
-        
+        Look();
+    }
+
+    public void OnMovement(InputAction.CallbackContext context)
+    {
+        _playerController.Movement = context.ReadValue<Vector2>();
+        _animStateController.MovementAnim(_playerController.Movement.magnitude);
+    }
+
+    #region MouseFunctions
+
+    public void Look()
+    {
         Vector3 mousePosWorld = GetMouseWorldPosition();
         Vector3 playerForward = mousePosWorld - _rigidbody.position;
         playerForward.y = 0;
@@ -82,20 +92,12 @@ public class PlayerInputManager : MonoBehaviour
         }
     }
 
-    public void OnMovement(InputAction.CallbackContext context)
-    {
-        _movement = context.ReadValue<Vector2>();
-        float movemagnitude = _movement.magnitude;
-        _animStateController.Animator.SetFloat("Move", movemagnitude);
-        _movement = context.ReadValue<Vector2>();
-    }
-
     public void OnMousePos(InputAction.CallbackContext context)
     {
         _mousePos = _playerController.Camera.WorldToScreenPoint(context.ReadValue<Vector2>());
     }
     
-    private Vector3 GetMouseWorldPosition()
+    public Vector3 GetMouseWorldPosition()
     {
         Ray ray = _playerController.Camera.ScreenPointToRay(Mouse.current.position.ReadValue());
         if (Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity))
@@ -104,41 +106,30 @@ public class PlayerInputManager : MonoBehaviour
         }
         return Vector3.zero;
     }
-    
+
+    #endregion
+
     public void OnDodging(InputAction.CallbackContext context)
     {
         bool isDodging = context.ReadValueAsButton();
-        _animStateController.Animator.SetBool("Roll", isDodging);
-
-        Vector3 jumpDirection = Vector3.up * _playerController.JumpForce;
-        Vector3 forwardDirection = transform.forward * _playerController.ForwardForce;
-        _rigidbody.AddForce(jumpDirection + forwardDirection, ForceMode.Impulse);    
-        
+        _animStateController.DodgeAnim(isDodging);
+        _playerController.DodgeMove();
     }
 
     public void OnCrouch(InputAction.CallbackContext context)
     {
-        _animStateController.Animator.SetTrigger("Crouch");
+        _animStateController.CrouchAni();
     }
 
     public void OnChangeWeapon(InputAction.CallbackContext context)
     {
-        if (_playerController.IsWeaponEquipped)
-        {
-            _playerController.IsWeaponEquipped = false;
-        }
-        else
-        {
-            _playerController.IsWeaponEquipped = true;
-            _animStateController.Animator.SetTrigger("ChangeWeapon");
-        }
-        _animStateController.Animator.SetBool("IsWeaponEquipped", _playerController.IsWeaponEquipped);
+        _playerController.ChangeWeaponVerification();
     }
 
     public void OnShoot(InputAction.CallbackContext context)
     {
         bool isShoot = context.ReadValueAsButton();
-        _animStateController.Animator.SetBool("Attack", isShoot);
+        _animStateController.ShootAnim(isShoot);
     }
 
     public void OnReload(InputAction.CallbackContext context)
