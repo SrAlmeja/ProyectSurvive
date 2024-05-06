@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Core
   - DeathZone
+  - Buildings
   layers:
   - Default
   - TransparentFX
