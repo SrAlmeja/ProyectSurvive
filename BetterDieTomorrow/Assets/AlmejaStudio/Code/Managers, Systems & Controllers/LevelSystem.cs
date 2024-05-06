@@ -26,9 +26,14 @@ public class LevelSystem : MonoBehaviour
         DontDestroyOnLoad(this.gameObject);
     }
 
+    public void NextLevel()
+    {
+        SceneManager.LoadSceneAsync(SceneManager.GetActiveScene().buildIndex + 1);
+    }
+
     public void LoadScene(string sceneToLoad)
     {
-        SceneManager.LoadScene(sceneToLoad);
+        SceneManager.LoadSceneAsync(sceneToLoad);
     }
     
     public void Pause()
