@@ -26,6 +26,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private GameObject _SpawnZonePrefab;
     private GameObject _crosshair;
     private GameObject _spawnZone;
+    [SerializeField] private PlayerGunSelector _gunSelector;
 
     [Header("SecundaryWeapon")]
     [SerializeField] GameObject secundaryWeapon;
@@ -96,6 +97,11 @@ public class PlayerController : MonoBehaviour
         _animStateController.ChangeWeaponVerif(_weaponEquipped);
     }
 
+    public void Shoot()
+    {
+        _gunSelector.ActiveGun.Shoot();
+        _gunSelector.ActiveGun.Shoot();
+    }
     private void Laser()
     {
         RaycastHit hit;
