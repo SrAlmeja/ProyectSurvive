@@ -17,9 +17,15 @@ public class Bullet : MonoBehaviour
         transform.Translate(Vector3.forward * speed * Time.deltaTime);
     }
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider other)
     {
-        GiveDamage(collision.gameObject);
+        if (other.CompareTag("Player"))
+        {
+            // Ignorar la colisión con el jugador
+            return;
+        }
+
+        GiveDamage(other.gameObject);
         DestroyBullet();
     }
 
@@ -31,7 +37,6 @@ public class Bullet : MonoBehaviour
     private void DestroyBullet()
     {
         Debug.Log("Destroying bullet");
-        transform.gameObject.SetActive(false);
+        gameObject.SetActive(false);
     }
 }
-

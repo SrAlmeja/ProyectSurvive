@@ -3210,7 +3210,7 @@ Rigidbody:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 64
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
   m_UseGravity: 1
@@ -3271,8 +3271,10 @@ MonoBehaviour:
   _croachSpeed: 0
   _camera: {fileID: 1870480250}
   laserSize: 10
-  laserOffset: {x: 0, y: 1.2, z: 0}
+  laserOffset: {x: 0, y: 1.2, z: 0.5}
   crosshairprefab: {fileID: 5358467524920266512, guid: 4a0d4351951dbfa46b29984266c3ced8, type: 3}
+  _SpawnZonePrefab: {fileID: 5438955965630016789, guid: 51391a5626227c940b48cfb08de01c30, type: 3}
+  secundaryWeapon: {fileID: 309989521}
 --- !u!114 &999247042
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9469,6 +9471,10 @@ PrefabInstance:
       propertyPath: damage
       value: 10
       objectReference: {fileID: 0}
+    - target: {fileID: 4219324663717805371, guid: 38dbcf1627c1e8141aa101224412ebec, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 5817631122702193817, guid: 38dbcf1627c1e8141aa101224412ebec, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.55236804
@@ -9514,8 +9520,16 @@ PrefabInstance:
       value: SecundaryBullet
       objectReference: {fileID: 0}
     - target: {fileID: 6370314446866524160, guid: 38dbcf1627c1e8141aa101224412ebec, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 6370314446866524160, guid: 38dbcf1627c1e8141aa101224412ebec, type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6396431527747407213, guid: 38dbcf1627c1e8141aa101224412ebec, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -9836,8 +9850,24 @@ PrefabInstance:
       value: DefaultBullet
       objectReference: {fileID: 0}
     - target: {fileID: 1833415756970616622, guid: 73825e2f9e2e08b48afff83558d539ec, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 1833415756970616622, guid: 73825e2f9e2e08b48afff83558d539ec, type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1860776385491796547, guid: 73825e2f9e2e08b48afff83558d539ec, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4616472879349718665, guid: 73825e2f9e2e08b48afff83558d539ec, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 5120144125273290674, guid: 73825e2f9e2e08b48afff83558d539ec, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
