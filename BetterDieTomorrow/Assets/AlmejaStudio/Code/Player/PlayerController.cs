@@ -8,7 +8,7 @@ public class PlayerController : MonoBehaviour
     #region InputVariables
 
     private Rigidbody _rigidbody;
-    [Header("Dedge Values")]
+    [Header("Dodge Values")]
     [SerializeField] private float _jumpForce;
     [SerializeField] private float _forwardForce;
     [Header("Movement Values")]
@@ -19,6 +19,12 @@ public class PlayerController : MonoBehaviour
     [Header("Look Values")]
     [SerializeField] private Camera _camera;
 
+    [Header("Shoot Values")]
+    [SerializeField] private float laserSize;
+    [SerializeField] private Vector3 laserOffset;
+    [SerializeField] private GameObject crosshairprefab;
+    private GameObject _crosshair;
+    
     private bool _weaponEquipped = false;
     private AnimationStateController _animStateController;
 
@@ -43,11 +49,15 @@ public class PlayerController : MonoBehaviour
         _rigidbody = GetComponent<Rigidbody>();
         _animStateController = GetComponent<AnimationStateController>();
         _animStateController.Animator = GetComponentInChildren<Animator>();
+        
+        _crosshair = Instantiate(crosshairprefab);
     }
 
     private void FixedUpdate()
     {
         Move();
+        Laser();
+        UpdateCrosshairPosition();
     }
     
     private void Move()
@@ -76,5 +86,49 @@ public class PlayerController : MonoBehaviour
             _animStateController.ChangeWeapon();
         }
         _animStateController.ChangeWeaponVerif(_weaponEquipped);
+    }
+
+    private void Laser()
+    {
+        RaycastHit hit;
+        Vector3 startPoint = transform.position + laserOffset;
+        Vector3 direction = transform.forward;
+
+        if (Physics.Raycast(startPoint, direction, out hit, laserSize))
+        {
+            if (hit.collider.CompareTag("Buildings"))
+            {
+                Debug.DrawRay(startPoint, direction * hit.distance, Color.green);
+            }
+            else
+            {
+                Debug.DrawRay(startPoint, direction * hit.distance, Color.red);
+            }
+        }
+        else
+        {
+            Debug.DrawRay(startPoint, direction * laserSize, Color.red);
+        }
+    }
+    private void UpdateCrosshairPosition()
+    {
+        RaycastHit hit;
+        Vector3 startPoint = transform.position + laserOffset;
+        Vector3 direction = transform.forward;
+
+        if (Physics.Raycast(startPoint, direction, out hit, laserSize))
+        {
+            _crosshair.transform.position = hit.point;
+        }
+        else
+        {
+
+            _crosshair.transform.position = startPoint + direction * laserSize;
+        }
+    }
+
+    public void SetMovement(Vector2 movement)
+    {
+        _movement = movement;
     }
 }
