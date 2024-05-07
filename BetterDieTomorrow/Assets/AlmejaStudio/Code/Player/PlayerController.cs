@@ -23,8 +23,12 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float laserSize;
     [SerializeField] private Vector3 laserOffset;
     [SerializeField] private GameObject crosshairprefab;
+    [SerializeField] private GameObject _SpawnZonePrefab;
     private GameObject _crosshair;
-    
+    private GameObject _spawnZone;
+
+    [Header("SecundaryWeapon")]
+    [SerializeField] GameObject secundaryWeapon;
     private bool _weaponEquipped = false;
     private AnimationStateController _animStateController;
 
@@ -50,7 +54,9 @@ public class PlayerController : MonoBehaviour
         _animStateController = GetComponent<AnimationStateController>();
         _animStateController.Animator = GetComponentInChildren<Animator>();
         
+        secundaryWeapon.SetActive(false);
         _crosshair = Instantiate(crosshairprefab);
+        _spawnZone = Instantiate(_SpawnZonePrefab);
     }
 
     private void FixedUpdate()
@@ -79,10 +85,13 @@ public class PlayerController : MonoBehaviour
         if (_weaponEquipped)
         {
             _weaponEquipped = false;
+            secundaryWeapon.SetActive(false);
+            _animStateController.ChangeWeapon();
         }
         else
         {
             _weaponEquipped = true;
+            secundaryWeapon.SetActive(true);
             _animStateController.ChangeWeapon();
         }
         _animStateController.ChangeWeaponVerif(_weaponEquipped);
