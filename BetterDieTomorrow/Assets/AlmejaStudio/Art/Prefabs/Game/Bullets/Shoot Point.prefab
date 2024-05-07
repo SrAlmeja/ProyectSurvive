@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2886371085623712859}
-  - component: {fileID: 4479151705957856713}
+  - component: {fileID: 3126883191991625824}
   m_Layer: 0
   m_Name: Shoot Point
   m_TagString: Untagged
@@ -32,7 +32,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &4479151705957856713
+--- !u!114 &3126883191991625824
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -41,10 +41,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 5438955965630016789}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fee28abac3d71bd4399f11a79fc7ead8, type: 3}
+  m_Script: {fileID: 11500000, guid: 4eaa1cc36390e4c4ab28aaa3ed0f7360, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pools:
-  - tag: DefaultBullet
-    prefab: {fileID: 1833415756970616622, guid: 73825e2f9e2e08b48afff83558d539ec, type: 3}
-    size: 30

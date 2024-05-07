@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PoolSpawner : MonoBehaviour
+public class PoolObject : MonoBehaviour
 {
     [System.Serializable]
     public class  Pool
@@ -17,7 +17,7 @@ public class PoolSpawner : MonoBehaviour
     [SerializeField] private List<Pool> pools;
     [SerializeField] private Dictionary<string, Queue<GameObject>> poolDictionary;
 
-    public static PoolSpawner Instance;
+    public static PoolObject Instance;
     private void Awake()
     {
         Instance = this;
@@ -36,7 +36,7 @@ public class PoolSpawner : MonoBehaviour
             Queue<GameObject> objectPool = new Queue<GameObject>();
             for (int i = 0; i < pool.size; i++)
             {
-                GameObject obj = Instantiate(pool.prefab, transform);
+                GameObject obj = Instantiate(pool.prefab);
                 obj.SetActive(false);
                 objectPool.Enqueue(obj);
             }
@@ -56,6 +56,13 @@ public class PoolSpawner : MonoBehaviour
         objectToSpawm.SetActive(true);
         objectToSpawm.transform.position = position;
         objectToSpawm.transform.rotation = rotation;
+
+        IPooledObject pooledObj = objectToSpawm.GetComponent<IPooledObject>();
+
+        if (pooledObj != null)
+        {
+            pooledObj.OnObjectSpawn();
+        }
 
         poolDictionary[tag].Enqueue(objectToSpawm);
         return objectToSpawm;

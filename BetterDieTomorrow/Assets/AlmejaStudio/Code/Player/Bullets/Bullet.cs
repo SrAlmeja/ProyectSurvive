@@ -2,15 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Bullet : MonoBehaviour
+public class Bullet : MonoBehaviour, IPooledObject
 {
     [SerializeField] public float speed;
     [SerializeField] public int damage;
 
-    private void Update()
+    public void OnObjectSpawn()
     {
         Move();
     }
+    
 
     private void Move()
     {
@@ -19,14 +20,10 @@ public class Bullet : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player"))
+        if (other.CompareTag("Buildings"))
         {
-            // Ignorar la colisión con el jugador
-            return;
+            DestroyBullet();
         }
-
-        GiveDamage(other.gameObject);
-        DestroyBullet();
     }
 
     private void GiveDamage(GameObject target)
