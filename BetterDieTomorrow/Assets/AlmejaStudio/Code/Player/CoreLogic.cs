@@ -11,10 +11,10 @@ public class CoreLogic : MonoBehaviour
     
     [SerializeField] private float _reparingTime;
     private bool _isReparing = true;
+    private bool isDead = false;
 
     private WinLoseConditionalController _winLose;
-    private LevelSystem _levelSystem;
-    
+
     public float TimeToWin
     {
         get
@@ -34,12 +34,6 @@ public class CoreLogic : MonoBehaviour
         {
             Debug.LogError("No se encontró el componente WinLoseConditionalController en la escena.");
         }
-
-        _levelSystem = FindObjectOfType<LevelSystem>();
-        if (_winLose == null)
-        {
-            Debug.LogError("No se encontró el componente LevelSystem en la escena.");
-        }
     }
 
     void Start()
@@ -53,16 +47,21 @@ public class CoreLogic : MonoBehaviour
         _currentHealth -= damage;
         Debug.Log("El Core recibe " + damage + " puntos de daño. Vida restante: " + _currentHealth);
 
-        if (_currentHealth <= 0)
+        if (!isDead)
         {
-            Die();
+            if (_currentHealth <= 0)
+            {
+                isDead = true;
+                Die();
+            }    
         }
+        
     }
 
     private void Die()
     {
+        Time.timeScale = 0f;
         _winLose.ShowDefeat();
-        _levelSystem.Pause();
     }
 
     private IEnumerator ReparingCoroutine()
@@ -81,7 +80,7 @@ public class CoreLogic : MonoBehaviour
     private void Win()
     {
         _winLose.ShowVictory();
-        _levelSystem.Pause();
+        Time.timeScale = 0f;
     }
 
     

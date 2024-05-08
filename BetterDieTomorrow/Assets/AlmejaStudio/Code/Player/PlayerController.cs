@@ -7,6 +7,10 @@ public class PlayerController : MonoBehaviour
 {
     [SerializeField] private int _initialHealth;
     [SerializeField] private int _currentHealth;
+    
+    private WinLoseConditionalController _winLose;
+    private LevelSystem _levelSystem;
+    private bool isDead = false;
 
     #region InputVariables
 
@@ -54,6 +58,17 @@ public class PlayerController : MonoBehaviour
 
     private void Awake()
     {
+        _winLose = FindObjectOfType<WinLoseConditionalController>();
+        if (_winLose == null)
+        {
+            Debug.LogError("No se encontró el componente WinLoseConditionalController en la escena.");
+        }
+
+        _levelSystem = FindObjectOfType<LevelSystem>();
+        if (_winLose == null)
+        {
+            Debug.LogError("No se encontró el componente LevelSystem en la escena.");
+        }
         _rigidbodyPlayer = GetComponent<Rigidbody>();
         _animStateController = GetComponent<AnimationStateController>();
         _animStateController.Animator = GetComponentInChildren<Animator>();
@@ -157,15 +172,20 @@ public class PlayerController : MonoBehaviour
         _currentHealth -= damage;
         Debug.Log("El Core recibe " + damage + " puntos de daño. Vida restante: " + _currentHealth);
 
-        if (_currentHealth <= 0)
+        if (!isDead)
         {
-            Die();
+            if (_currentHealth <= 0)
+            {
+                isDead = true;
+                Die();
+            }    
         }
+        
     }
 
     private void Die()
     {
-        Debug.Log("GameOver");
-        //Destroy(gameObject);
+        Time.timeScale = 0f;
+        _winLose.ShowDefeat();
     }
 }
