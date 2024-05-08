@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: SkullBullet
   m_EditorClassIdentifier: 
   Name: SkullBullet
-  Speed: 4
-  Damage: 30
+  Speed: 6
+  Damage: 40
   BulletPrefab: {fileID: 1833415756970616622, guid: 73825e2f9e2e08b48afff83558d539ec, type: 3}
   TrailConfig: {fileID: 11400000, guid: 897089412e59c1d4dbf268709a566f2f, type: 2}

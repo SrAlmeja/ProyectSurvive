@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3d15cd9113f67bb48bd7613cda40eafe, type: 3}
-  m_Name: ManiquiBasic
+  m_Name: ManiquiBasic 2
   m_EditorClassIdentifier: 
   enemyName: BasicManiqui
-  prefab: {fileID: 6382914310720785933, guid: 21fb9680fe11dd14fb34fa332631198b, type: 3}
-  health: 50
-  movementSpeed: 2
-  attackPower: 15
-  droppedPoins: 100
+  prefab: {fileID: 6382914310720785933, guid: 7ffabce9f46639949b94485115d9c60f, type: 3}
+  health: 120
+  movementSpeed: 3
+  attackPower: 20
+  droppedPoins: 1000

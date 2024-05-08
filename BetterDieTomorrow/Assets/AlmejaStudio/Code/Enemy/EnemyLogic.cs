@@ -18,11 +18,26 @@ public class EnemyLogic : MonoBehaviour
     [SerializeField]private SOEnemy enemyData;
     private EnemyAnimationController _eAnimController;
 
+    private PlayerController _playerController;
+    private CoreLogic _coreLogic;
 
     private void Awake()
     {
         _agent = GetComponent<NavMeshAgent>();
         _eAnimController = GetComponent<EnemyAnimationController>();
+        
+        _playerController = FindObjectOfType<PlayerController>();
+        _coreLogic = FindObjectOfType<CoreLogic>();
+
+        if (_playerController == null)
+        {
+            Debug.LogError("No se encontró el componente PlayerController en la escena.");
+        }
+
+        if (_coreLogic == null)
+        {
+            Debug.LogError("No se encontró el componente CoreLogic en la escena.");
+        }
     }
 
     void Start()
@@ -104,6 +119,7 @@ public class EnemyLogic : MonoBehaviour
         if (_currentHealth <= 0)
         {
             _currentHealth = 0;
+            ScoreManager.IncrementScore(enemyData.droppedPoins);
             Die();
         }
     }
@@ -119,5 +135,12 @@ public class EnemyLogic : MonoBehaviour
         _eAnimController.Dead();
         Destroy(gameObject, 5f);
     }
-    
+
+    private void Update()
+    {
+        if (_playerController.isDead || _coreLogic.isDead)
+        {
+            StopEnemy();
+        }
+    }
 }

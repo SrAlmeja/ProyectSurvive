@@ -8,4 +8,5 @@ public class SOEnemy : ScriptableObject
     public int health;
     public float movementSpeed;
     public int attackPower;
+    public int droppedPoins;
 }

@@ -36,15 +36,18 @@ public class EnemySpawn : MonoBehaviour
             return;
         }
 
-        if (enemyPrefabs[0] == null)
-        {
-            Debug.LogWarning("Enemy prefab is null.");
-            return;
-        }
-
         for (int i = 0; i < count; i++)
         {
-            Instantiate(enemyPrefabs[0], transform.position, Quaternion.identity);
+            int randomIndex = Random.Range(0, enemyPrefabs.Count);
+            GameObject enemyPrefab = enemyPrefabs[randomIndex];
+
+            if (enemyPrefab == null)
+            {
+                Debug.LogWarning("Enemy prefab is null.");
+                continue;
+            }
+
+            Instantiate(enemyPrefab, transform.position, Quaternion.identity);
         }
     }
 

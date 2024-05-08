@@ -10,7 +10,8 @@ public class PlayerController : MonoBehaviour
     
     private WinLoseConditionalController _winLose;
     private LevelSystem _levelSystem;
-    private bool isDead = false;
+    public bool isDead = false;
+
 
     #region InputVariables
 
@@ -164,6 +165,11 @@ public class PlayerController : MonoBehaviour
             EnemyLogic enemyLogic = other.GetComponent<EnemyLogic>();
             ReciveDamage(enemyLogic.Damage);
         }
+
+        if (other.CompareTag("DeathZone"))
+        {
+            Die();
+        }
     }
 
 
@@ -185,7 +191,6 @@ public class PlayerController : MonoBehaviour
 
     private void Die()
     {
-        Time.timeScale = 0f;
         _winLose.ShowDefeat();
     }
 }

@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: ABullet
   Speed: 50
-  Damage: 10
+  Damage: 20
   BulletPrefab: {fileID: 6370314446866524160, guid: 38dbcf1627c1e8141aa101224412ebec, type: 3}
   TrailConfig: {fileID: 11400000, guid: 68e2fd83401239e46a1e7e80d450b6bf, type: 2}
