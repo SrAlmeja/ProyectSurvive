@@ -8816,9 +8816,9 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1389338133}
+  - {fileID: 2038489847}
   - {fileID: 5574830171569370877}
   - {fileID: 3552328130351405464}
-  - {fileID: 2038489847}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -8892,7 +8892,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 0.509434, g: 0, b: 0, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -14083,7 +14083,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 424300449964069210, guid: 0a800cafab519be4abecfb26a086b051, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1390307382243880128, guid: 0a800cafab519be4abecfb26a086b051, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
@@ -14128,6 +14128,14 @@ PrefabInstance:
     - target: {fileID: 1390307382243880128, guid: 0a800cafab519be4abecfb26a086b051, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 4496804279825822598, guid: 0a800cafab519be4abecfb26a086b051, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5799704349990670951, guid: 0a800cafab519be4abecfb26a086b051, type: 3}
+      propertyPath: m_RaycastTarget
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9074522151119963846, guid: 0a800cafab519be4abecfb26a086b051, type: 3}
       propertyPath: m_Pivot.x
