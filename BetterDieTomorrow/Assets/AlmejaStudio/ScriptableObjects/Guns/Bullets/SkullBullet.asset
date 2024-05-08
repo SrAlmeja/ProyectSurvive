@@ -9,14 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8bd4cfc1eb231e94c8a77189d5ecda35, type: 3}
-  m_Name: WeaponOftheDead
+  m_Script: {fileID: 11500000, guid: 45f51b8bd1a584449b7e1eee751ccee3, type: 3}
+  m_Name: SkullBullet
   m_EditorClassIdentifier: 
-  Type: 0
-  Name: MagicPalm
-  ModelPrefab: {fileID: 6889486370637127857, guid: 3681db82bc4716f499b5181cc1df9f6f, type: 3}
+  Name: SkullBullet
+  Speed: 4
+  Damage: 30
   BulletPrefab: {fileID: 1833415756970616622, guid: 73825e2f9e2e08b48afff83558d539ec, type: 3}
-  SpawnPoint: {x: 0, y: 1.239, z: 0}
-  SpawnRotation: {x: 0, y: 0, z: 0}
-  ShootConfig: {fileID: 11400000, guid: e4802df433dba9944afc0b5f4bdf4dbe, type: 2}
   TrailConfig: {fileID: 11400000, guid: 897089412e59c1d4dbf268709a566f2f, type: 2}

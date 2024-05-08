@@ -35,17 +35,10 @@ public class BulletSpawner : MonoBehaviour
             int bulletToSpawnInFrame = Mathf.CeilToInt(Time.deltaTime / delay);
             while (bulletToSpawnInFrame > 0)
             {
-                if (!useObjectPool)
-                {
-                    Bullet instance = Instantiate(bulletPrefab, Vector3.zero, Quaternion.identity);
-                    instance.transform.SetParent(transform, true);
-
-                    SpawnBullet(instance);
-                }
-                else
-                {
-                    bulletPool.Get();
-                }
+                Bullet instance = bulletPool.Get();
+                instance.gameObject.SetActive(true);
+                instance.transform.SetParent(transform, true);
+                SpawnBullet(instance);
 
                 bulletToSpawnInFrame--;
             }
@@ -67,9 +60,9 @@ public class BulletSpawner : MonoBehaviour
 
     private Bullet CreatePooledObject()
     {
-        Bullet instance = Instantiate(bulletPrefab, Vector3.zero, quaternion.identity);
-        instance.disable += ReturnObjectToPool;
+        Bullet instance = Instantiate(bulletPrefab);
         instance.gameObject.SetActive(false);
+        return instance;
 
         return instance;
     }
@@ -88,7 +81,7 @@ public class BulletSpawner : MonoBehaviour
 
     private void ReturnObjectToPool(Bullet instance)
     {
-        bulletPool.Release(instance);
+        instance.gameObject.SetActive(false);
     }
     private void OnDestoryObject(Bullet instance)
     {
@@ -108,7 +101,8 @@ public class BulletSpawner : MonoBehaviour
 
         instance.transform.position = spawnLocation;
 
-        instance.Shoot(spawnLocation, spawnArea.transform.right, speed);
+        instance.transform.position = spawnLocation;
+        //instance.Shoot(spawnLocation, spawnArea.transform.right, speed);
     }
 
     #endregion

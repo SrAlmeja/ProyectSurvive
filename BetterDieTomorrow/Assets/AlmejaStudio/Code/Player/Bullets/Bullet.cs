@@ -1,48 +1,50 @@
-using System.Collections;
-using System.Collections.Generic;
+using System;
 using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
-    [SerializeField] private float speed;
-    [SerializeField] private int damage;
-    [SerializeField] private Rigidbody rigidBodyBullet;
+    [SerializeField] private OSBullet bulletData;
+    private GameObject bulletPrefab;
+    private Rigidbody bulletRigidbody;
+    private Collider bulletCollider;
 
-    public delegate void OnDisableCallback(Bullet Instance);
-    public OnDisableCallback disable;
-    
-    private void Move()
+    private void Awake()
     {
-        transform.Translate(Vector3.forward * speed * Time.deltaTime);
-    }
-    
-    public void Shoot(Vector3  Position, Vector3 Direction, float Speed)
-    {
-        rigidBodyBullet.velocity = Vector3.zero;
-        transform.position = Position;
-        transform.forward = Direction;
-        
-        rigidBodyBullet.AddForce(Direction * Speed, ForceMode.VelocityChange);
+        bulletPrefab = Instantiate(bulletData.BulletPrefab, transform.position, transform.rotation, transform);
+        bulletRigidbody = GetComponent<Rigidbody>();
+
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void Start()
     {
-        if (other.CompareTag("Buildings"))
+        TrailCreator();
+        Move();
+    }
+
+    private void TrailCreator()
+    {
+        TrailRenderer trail = bulletPrefab.GetComponent<TrailRenderer>();
+        if (trail != null)
         {
-            rigidBodyBullet.velocity = Vector3.zero;
-            GiveDamage(other.gameObject);
-            DestroyBullet();
+            trail.emitting = true;
         }
     }
 
-    private void GiveDamage(GameObject target)
+    private void Move()
     {
-        Debug.Log("Dealing "+ damage + " of damage to: " + target.name);
+        if (bulletRigidbody != null)
+        {
+            bulletRigidbody.velocity = transform.forward * bulletData.Speed;
+        }
     }
 
-    private void DestroyBullet()
+    public void GiveDamage()
     {
-        Debug.Log("Destroying bullet");
-        disable?.Invoke(this);
+        int damage = bulletData.Damage; 
+    }
+
+    public void DestroyBullet()
+    {
+        Destroy(gameObject);
     }
 }

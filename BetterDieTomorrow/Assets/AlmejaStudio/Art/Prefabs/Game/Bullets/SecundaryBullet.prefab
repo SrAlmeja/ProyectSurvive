@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 85310012755372136}
   - component: {fileID: 2056198553856648789}
   m_Layer: 0
-  m_Name: DefaultBullet
+  m_Name: SecundaryBullet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -45,7 +45,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67ef6b175fc0669468767004c197485f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bulletData: {fileID: 11400000, guid: 7dfaa5afb6702824bba7ab6925f88fec, type: 2}
+  bulletData: {fileID: 11400000, guid: 859a62840b70ddb4fb73a070b7da904e, type: 2}
 --- !u!54 &2056198553856648789
 Rigidbody:
   m_ObjectHideFlags: 0
