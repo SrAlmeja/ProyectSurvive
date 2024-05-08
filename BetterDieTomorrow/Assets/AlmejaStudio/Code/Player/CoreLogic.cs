@@ -1,6 +1,8 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class CoreLogic : MonoBehaviour
 {
@@ -9,6 +11,9 @@ public class CoreLogic : MonoBehaviour
     
     [SerializeField] private float _reparingTime;
     private bool _isReparing = true;
+
+    private WinLoseConditionalController _winLose;
+    private LevelSystem _levelSystem;
     
     public float TimeToWin
     {
@@ -19,6 +24,21 @@ public class CoreLogic : MonoBehaviour
         set
         {
             _reparingTime = value;
+        }
+    }
+
+    private void Awake()
+    {
+        _winLose = FindObjectOfType<WinLoseConditionalController>();
+        if (_winLose == null)
+        {
+            Debug.LogError("No se encontró el componente WinLoseConditionalController en la escena.");
+        }
+
+        _levelSystem = FindObjectOfType<LevelSystem>();
+        if (_winLose == null)
+        {
+            Debug.LogError("No se encontró el componente LevelSystem en la escena.");
         }
     }
 
@@ -41,8 +61,8 @@ public class CoreLogic : MonoBehaviour
 
     private void Die()
     {
-        Debug.Log("GameOver");
-        //Destroy(gameObject);
+        _winLose.ShowDefeat();
+        _levelSystem.Pause();
     }
 
     private IEnumerator ReparingCoroutine()
@@ -51,7 +71,7 @@ public class CoreLogic : MonoBehaviour
         float timer = _reparingTime;
         while (timer > 0)
         {
-            //Debug.Log("Tiempo restante: " + timer.ToString("0"));
+            Debug.Log("Tiempo restante: " + timer.ToString("0"));
             yield return new WaitForSeconds(1f);
             timer--;
         }
@@ -60,7 +80,8 @@ public class CoreLogic : MonoBehaviour
 
     private void Win()
     {
-        Debug.Log("¡Ganaste!");
+        _winLose.ShowVictory();
+        _levelSystem.Pause();
     }
 
     
