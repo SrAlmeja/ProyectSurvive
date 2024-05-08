@@ -9,11 +9,23 @@ public class CoreLogic : MonoBehaviour
     
     [SerializeField] private float _reparingTime;
     private bool _isReparing = true;
+    
+    public float TimeToWin
+    {
+        get
+        {
+            return _reparingTime;
+        }
+        set
+        {
+            _reparingTime = value;
+        }
+    }
 
     void Start()
     {
         _currentHealth = _initialHealth;
-        //StartCoroutine(ReparingCoroutine()); > Reactivate for WinCondition
+        StartCoroutine(ReparingCoroutine());
     }
 
     public void ReciveDamage(int damage)

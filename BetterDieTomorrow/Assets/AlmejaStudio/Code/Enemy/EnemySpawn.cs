@@ -8,14 +8,24 @@ public class EnemySpawn : MonoBehaviour
     [SerializeField] private int enemiesPerWave;
     [SerializeField] private int waves;
     
-    [SerializeField] private float _coldDownWaveTime;
-    private float _currentColdDownWT;
-    private bool _isOnColdDown = false;
+    private float _coldDownWaveTime;
+    private float _currentColdDownTime;
+    
+    private CoreLogic _coreLogic;
+    
+    private void Awake()
+    {
+        _coreLogic = FindObjectOfType<CoreLogic>();
+        if (_coreLogic == null)
+        {
+            Debug.LogError("No se encontró un objeto con el componente CoreLogic en la escena.");
+        }
+    }
     
     private void Start()
     {
+        _coldDownWaveTime = TimeCalculation();
         StartCoroutine(StartWaves());
-        _currentColdDownWT = _coldDownWaveTime;
     }
 
     public void Spawn(int count)
@@ -38,6 +48,18 @@ public class EnemySpawn : MonoBehaviour
         }
     }
 
+    private float TimeCalculation()
+    {
+        if (_coreLogic == null)
+        {
+            Debug.LogError("No se encontró un objeto con el componente CoreLogic en la escena.");
+            return 0f;
+        }
+
+        float timeToWin = _coreLogic.TimeToWin;
+        float coldDownWavesTime = (timeToWin - 0.3f * timeToWin) / waves;
+        return coldDownWavesTime;
+    }
     public void Waves()
     {
         Spawn(enemiesPerWave);
@@ -51,16 +73,14 @@ public class EnemySpawn : MonoBehaviour
             Waves();
         }
     }
-
+    
     private IEnumerator StartColdDownForNextWave()
     {
-        _isOnColdDown = true;
-        while (_currentColdDownWT > 0)
+        while (_currentColdDownTime > 0)
         {
             yield return new WaitForSeconds(1f);
-            _currentColdDownWT--;
+            _currentColdDownTime--;
         }
-        _isOnColdDown = false;
-        _currentColdDownWT = _coldDownWaveTime;
+        _currentColdDownTime = _coldDownWaveTime;
     }
 }
