@@ -5,48 +5,75 @@ using UnityEngine;
 public class CoreLogic : MonoBehaviour
 {
     [SerializeField] private int _initialHealth;
-    private int _currentHealth;
-    [SerializeField] private float _coldDown;
-    private bool _isOnColdDown;
+    [SerializeField] private int _currentHealth;
     
+    [SerializeField] private float _reparingTime;
+    private bool _isReparing = true;
+
+    void Start()
+    {
+        _currentHealth = _initialHealth;
+        //StartCoroutine(ReparingCoroutine()); > Reactivate for WinCondition
+    }
 
     public void ReciveDamage(int damage)
     {
-        if (!_isOnColdDown)
+        _currentHealth -= damage;
+        Debug.Log("El Core recibe " + damage + " puntos de daño. Vida restante: " + _currentHealth);
+
+        if (_currentHealth <= 0)
         {
-            _currentHealth -= damage;
-            Debug.Log("El Enemy Me golpea " + damage + ". Vida restante: " + _currentHealth);
+            Die();
         }
     }
- 
+
+    private void Die()
+    {
+        Debug.Log("GameOver");
+        //Destroy(gameObject);
+    }
+
+    private IEnumerator ReparingCoroutine()
+    {
+        _isReparing = true;
+        float timer = _reparingTime;
+        while (timer > 0)
+        {
+            Debug.Log("Tiempo restante: " + timer.ToString("0"));
+            yield return new WaitForSeconds(1f);
+            timer--;
+        }
+        _isReparing = false;
+    }
+
+    private void Win()
+    {
+        Debug.Log("¡Ganaste!");
+    }
+
+    
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Enemy"))
         {
-            _isOnColdDown = true;
-            _currentHealth -= 10; // Por ejemplo, resta 10 de salud al entrar en contacto con un enemigo
-            StartCoroutine(StartCooldown());
-        }
-    }
-
-    private void FixedUpdate()
-    {
-        if (_isOnColdDown)
-        {
-            _coldDown -= Time.fixedDeltaTime;
-            if (_coldDown <= 0)
+            EnemyLogic enemy = other.GetComponent<EnemyLogic>();
+            if (enemy != null)
             {
-                _isOnColdDown = false;
-                _coldDown = 3f; // Reinicia el cooldown a 3 segundos
+                ReciveDamage(enemy.Damage);
+            }
+        }
+
+        if (other.CompareTag("Player"))
+        {
+            if (_isReparing)
+            {
+                Debug.Log("Maquina Espacio Tiempo Quantica Magica sigue sibre cargada, " +
+                          "tiempo estimado de reparacion" + _reparingTime);
+            }
+            else
+            {
+                Win();
             }
         }
     }
-
-    private IEnumerator StartCooldown()
-    {
-        yield return new WaitForSeconds(_coldDown);
-        _isOnColdDown = false;
-        _coldDown = 3f; // Reinicia el cooldown a 3 segundos
-    }
-
 }

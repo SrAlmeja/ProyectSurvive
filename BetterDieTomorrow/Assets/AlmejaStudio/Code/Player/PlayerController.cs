@@ -5,11 +5,9 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    private int _initialHealth;
-    private int _currentHealth;
-    private int _coldDown;
-    private bool _isOnColdDown;
-    
+    [SerializeField] private int _initialHealth;
+    [SerializeField] private int _currentHealth;
+
     #region InputVariables
 
     private Rigidbody _rigidbodyPlayer;
@@ -156,11 +154,18 @@ public class PlayerController : MonoBehaviour
 
     public void ReciveDamage(int damage)
     {
-        Debug.Log("El Enemy Me golpea" + damage);
+        _currentHealth -= damage;
+        Debug.Log("El Core recibe " + damage + " puntos de daño. Vida restante: " + _currentHealth);
+
+        if (_currentHealth <= 0)
+        {
+            Die();
+        }
     }
 
-    public void Die()
+    private void Die()
     {
-        
+        Debug.Log("GameOver");
+        //Destroy(gameObject);
     }
 }

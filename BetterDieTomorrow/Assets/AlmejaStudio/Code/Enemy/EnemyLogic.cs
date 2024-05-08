@@ -14,12 +14,14 @@ public class EnemyLogic : MonoBehaviour
     private bool isDead;
     
     [SerializeField]private SOEnemy enemyData;
-    private EnemyAnimationController EAnimController;
+    private EnemyAnimationController _eAnimController;
 
+    [SerializeField]
+    private GameObject DummyTarget;
 
     private void Awake()
     {
-        EAnimController = GetComponent<EnemyAnimationController>();
+        _eAnimController = GetComponent<EnemyAnimationController>();
     }
 
     void Start()
@@ -35,6 +37,15 @@ public class EnemyLogic : MonoBehaviour
         }
     }
 
+    private void FixedUpdate()
+    {
+        if (!isDead)
+        {
+            MoveTo(DummyTarget.transform);
+        }
+        
+    }
+
     public void ReciveDamage()
     {
         
@@ -45,9 +56,23 @@ public class EnemyLogic : MonoBehaviour
         
     }
     
-    public void MoveTo()
+    
+    public void MoveTo(Transform target)
     {
-        
+        if (target != null)
+        {
+            
+            Vector3 direction = (target.position - transform.position).normalized;
+            
+            float distance = Vector3.Distance(transform.position, target.position);
+            
+            transform.position += direction * enemyData.movementSpeed * Time.deltaTime;
+
+            if (distance < 0.1f)
+            {
+                target = null;
+            }
+        }
     }
     
     public int Damage
@@ -60,7 +85,7 @@ public class EnemyLogic : MonoBehaviour
     {
         if (!isDead)
         {
-            _damage = enemyData.attackPower;
+            _damage = enemyData.attackPower; ;
             Debug.Log("Enemy is attacking!");
         }
         else
@@ -89,6 +114,7 @@ public class EnemyLogic : MonoBehaviour
         if (other.CompareTag("Player")|| other.CompareTag("Core"))
         {
             Attack();
+            isDead = true;
             Destroy();
         }
     }
@@ -110,8 +136,8 @@ public class EnemyLogic : MonoBehaviour
     }
 
     private void Destroy()
-    {
-        EAnimController.Dead();
+    { 
+        _eAnimController.Dead();
         Destroy(gameObject, 5f);
     }
     
