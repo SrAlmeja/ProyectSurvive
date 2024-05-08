@@ -39,7 +39,7 @@ public class CoreLogic : MonoBehaviour
         float timer = _reparingTime;
         while (timer > 0)
         {
-            Debug.Log("Tiempo restante: " + timer.ToString("0"));
+            //Debug.Log("Tiempo restante: " + timer.ToString("0"));
             yield return new WaitForSeconds(1f);
             timer--;
         }

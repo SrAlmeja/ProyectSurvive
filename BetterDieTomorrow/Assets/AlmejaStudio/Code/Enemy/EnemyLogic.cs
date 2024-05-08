@@ -12,13 +12,12 @@ public class EnemyLogic : MonoBehaviour
     private int _startingHealth;
     private int _currentHealth;
     private int _damage;
-    private bool isDead;
+    [HideInInspector] public bool isDead;
     private NavMeshAgent _agent;
     
     [SerializeField]private SOEnemy enemyData;
     private EnemyAnimationController _eAnimController;
 
-    [SerializeField] private GameObject DummyTarget;
 
     private void Awake()
     {
@@ -39,33 +38,15 @@ public class EnemyLogic : MonoBehaviour
         }
     }
 
-    /*private void FixedUpdate()
-    {
-        if (!isDead)
-        {
-            MoveTo(DummyTarget.transform);    
-        }
-        else
-        {
-            StopEnemy();
-        }
-        
-    }*/
-
     public void ReciveDamage()
     {
-        
+        //Use it if there is time of damage animation
     }
-    
-    public void LiveCheck()
-    {
-        
-    }
-    
-    
+
+
     public void MoveTo(Transform target)
     {
-        _agent.SetDestination(DummyTarget.transform.position);
+        _agent.SetDestination(target.transform.position);
     }
 
     public void StopEnemy()

@@ -6,6 +6,7 @@ public class EnemyBehaiviour : MonoBehaviour
 {
     private GameObject player;
     private GameObject core;
+    private GameObject _closserTarget;
 
     private EnemyLogic _eLogic;
 
@@ -18,10 +19,23 @@ public class EnemyBehaiviour : MonoBehaviour
 
     private void Start()
     {
-        ClosserTarget();
+        StartCoroutine(CheckClosestTarget());
     }
     
-    
+    private void FixedUpdate()
+    {
+        if (_closserTarget != null)
+        {
+            if (!_eLogic.isDead)
+            {
+                _eLogic.MoveTo(_closserTarget.transform);    
+            }
+            else
+            {
+                _eLogic.StopEnemy();
+            }
+        }
+    }
 
     private GameObject FindClosestWithTag(string tag)
     {
@@ -44,12 +58,12 @@ public class EnemyBehaiviour : MonoBehaviour
         return closest;
     }
 
-    private void ClosserTarget()
+    private GameObject CalculateClosestTarget()
     {
         if (player == null || core == null)
         {
             Debug.LogWarning("Player or core not found.");
-            return;
+            return null;
         }
 
         float playerDistance = Vector3.Distance(transform.position, player.transform.position);
@@ -57,11 +71,20 @@ public class EnemyBehaiviour : MonoBehaviour
 
         if (playerDistance < coreDistance)
         {
-            Debug.Log("Player is closer.");
+            return player;
         }
         else
         {
-            Debug.Log("Core is closer.");
+            return core;
+        }
+    }
+    
+    private IEnumerator CheckClosestTarget()
+    {
+        while (true)
+        {
+            _closserTarget = CalculateClosestTarget();
+            yield return new WaitForSeconds(0.5f); // Check every 0.5 seconds
         }
     }
 }

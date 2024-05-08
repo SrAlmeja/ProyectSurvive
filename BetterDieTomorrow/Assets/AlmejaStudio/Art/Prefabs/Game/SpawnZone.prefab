@@ -48,4 +48,4 @@ MonoBehaviour:
   - {fileID: 6382914310720785933, guid: 21fb9680fe11dd14fb34fa332631198b, type: 3}
   enemiesPerWave: 5
   waves: 3
-  coldDownW: 5
+  _coldDownWaveTime: 10

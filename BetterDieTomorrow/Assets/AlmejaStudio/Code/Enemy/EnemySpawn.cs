@@ -7,14 +7,18 @@ public class EnemySpawn : MonoBehaviour
     [SerializeField] private List<GameObject> enemyPrefabs;
     [SerializeField] private int enemiesPerWave;
     [SerializeField] private int waves;
-    [SerializeField] private float coldDownW;
+    
+    [SerializeField] private float _coldDownWaveTime;
+    private float _currentColdDownWT;
+    private bool _isOnColdDown = false;
     
     private void Start()
     {
-        Spawn();
+        StartCoroutine(StartWaves());
+        _currentColdDownWT = _coldDownWaveTime;
     }
 
-    public void Spawn()
+    public void Spawn(int count)
     {
         if (enemyPrefabs.Count == 0)
         {
@@ -28,6 +32,35 @@ public class EnemySpawn : MonoBehaviour
             return;
         }
 
-        Instantiate(enemyPrefabs[0], transform.position, Quaternion.identity);
+        for (int i = 0; i < count; i++)
+        {
+            Instantiate(enemyPrefabs[0], transform.position, Quaternion.identity);
+        }
+    }
+
+    public void Waves()
+    {
+        Spawn(enemiesPerWave);
+    }
+    
+    private IEnumerator StartWaves()
+    {
+        for (int waveIndex = 0; waveIndex < waves; waveIndex++)
+        {
+            yield return StartCoroutine(StartColdDownForNextWave());
+            Waves();
+        }
+    }
+
+    private IEnumerator StartColdDownForNextWave()
+    {
+        _isOnColdDown = true;
+        while (_currentColdDownWT > 0)
+        {
+            yield return new WaitForSeconds(1f);
+            _currentColdDownWT--;
+        }
+        _isOnColdDown = false;
+        _currentColdDownWT = _coldDownWaveTime;
     }
 }
