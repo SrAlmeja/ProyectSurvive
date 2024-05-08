@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8bd4cfc1eb231e94c8a77189d5ecda35, type: 3}
   m_Name: FuturisticWizardWeapon
   m_EditorClassIdentifier: 
-  Bullet: {fileID: 0}
-  SpawnPoint: {x: 0, y: 0, z: 0}
-  CadenceVelocity: 0
+  name: FuturisticWizardWeapon
+  Bullet: {fileID: 1049125284464116240, guid: 9fea1a94f240f9d4c978101ab0e90e85, type: 3}
+  CadenceVelocity: 0.1
   InfiniteBullets: 0
-  Bullets: 0
+  Bullets: 40

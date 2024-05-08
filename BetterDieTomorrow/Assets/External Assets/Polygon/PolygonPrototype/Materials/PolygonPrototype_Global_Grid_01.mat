@@ -41,7 +41,7 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - OverlayAmount: 0.488
+    - OverlayAmount: 1
     - _Falloff: 50
     - _GridScale: 1
     - _OverlayAmount: 0.5

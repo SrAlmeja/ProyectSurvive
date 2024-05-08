@@ -7,6 +7,8 @@ TagManager:
   - Core
   - DeathZone
   - Buildings
+  - Enemy
+  - Bullet
   layers:
   - Default
   - TransparentFX
@@ -17,8 +19,8 @@ TagManager:
   - SpawnArea
   - Bullet
   - Enemy
-  - 
-  - 
+  - Player
+  - Bushes
   - 
   - 
   - 

@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3d15cd9113f67bb48bd7613cda40eafe, type: 3}
   m_Name: ManiquiBasic
   m_EditorClassIdentifier: 
-  enemyName: 
-  prefab: {fileID: 0}
-  health: 0
-  movementSpeed: 0
-  attackPower: 0
+  enemyName: BasicManiqui
+  prefab: {fileID: 6382914310720785933, guid: 21fb9680fe11dd14fb34fa332631198b, type: 3}
+  health: 40
+  movementSpeed: 2
+  attackPower: 100

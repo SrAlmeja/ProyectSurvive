@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8bd4cfc1eb231e94c8a77189d5ecda35, type: 3}
   m_Name: DeadHand
   m_EditorClassIdentifier: 
-  Bullet: {fileID: 0}
-  SpawnPoint: {x: 0, y: 0, z: 0}
-  CadenceVelocity: 0
-  InfiniteBullets: 0
-  Bullets: 0
+  name: DeadHand
+  Bullet: {fileID: 1049125284464116240, guid: 43f70c733ed35a14d8f83797ada8f97a, type: 3}
+  CadenceVelocity: 100
+  InfiniteBullets: 1
+  Bullets: 5
