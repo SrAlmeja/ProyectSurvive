@@ -5,6 +5,7 @@ using System.Dynamic;
 using System.Security.Cryptography;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class EnemyLogic : MonoBehaviour
 {
@@ -12,15 +13,16 @@ public class EnemyLogic : MonoBehaviour
     private int _currentHealth;
     private int _damage;
     private bool isDead;
+    private NavMeshAgent _agent;
     
     [SerializeField]private SOEnemy enemyData;
     private EnemyAnimationController _eAnimController;
 
-    [SerializeField]
-    private GameObject DummyTarget;
+    [SerializeField] private GameObject DummyTarget;
 
     private void Awake()
     {
+        _agent = GetComponent<NavMeshAgent>();
         _eAnimController = GetComponent<EnemyAnimationController>();
     }
 
@@ -41,7 +43,11 @@ public class EnemyLogic : MonoBehaviour
     {
         if (!isDead)
         {
-            MoveTo(DummyTarget.transform);
+            MoveTo(DummyTarget.transform);    
+        }
+        else
+        {
+            StopEnemy();
         }
         
     }
@@ -59,20 +65,12 @@ public class EnemyLogic : MonoBehaviour
     
     public void MoveTo(Transform target)
     {
-        if (target != null)
-        {
-            
-            Vector3 direction = (target.position - transform.position).normalized;
-            
-            float distance = Vector3.Distance(transform.position, target.position);
-            
-            transform.position += direction * enemyData.movementSpeed * Time.deltaTime;
+        _agent.SetDestination(DummyTarget.transform.position);
+    }
 
-            if (distance < 0.1f)
-            {
-                target = null;
-            }
-        }
+    public void StopEnemy()
+    {
+        _agent.isStopped = true;
     }
     
     public int Damage
