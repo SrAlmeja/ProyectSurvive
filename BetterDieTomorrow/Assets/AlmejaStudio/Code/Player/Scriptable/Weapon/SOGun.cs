@@ -7,10 +7,7 @@ public class SOGun : ScriptableObject
 {
     public string name;
     public GameObject Bullet;
-    public Vector3 SpawnPoint;
-    public int CadenceVelocity;
+    public float CadenceVelocity;
     public bool InfiniteBullets;
     public int Bullets;
-
-    // Resto del script
 }

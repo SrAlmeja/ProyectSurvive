@@ -130,7 +130,16 @@ public class PlayerInputManager : MonoBehaviour
     {
         bool isShoot = context.ReadValueAsButton();
         _animStateController.ShootAnim(isShoot);
-        _playerController.Shoot();
+        
+        
+        if (isShoot)
+        {
+            _playerController.Shoot();
+        }
+        else
+        {
+            _playerController.StopShooting();
+        }
     }
 
     public void OnReload(InputAction.CallbackContext context)

@@ -7,6 +7,7 @@ public class Bullet : MonoBehaviour
     private GameObject bulletPrefab;
     private Rigidbody bulletRigidbody;
     private Collider bulletCollider;
+    private int _damage;
 
     private void Awake()
     {
@@ -17,6 +18,7 @@ public class Bullet : MonoBehaviour
 
     private void Start()
     {
+        _damage = bulletData.Damage;
         TrailCreator();
         Move();
     }
@@ -38,9 +40,15 @@ public class Bullet : MonoBehaviour
         }
     }
 
-    public void GiveDamage()
+    public int Damage
     {
-        int damage = bulletData.Damage; 
+        get { return _damage; }
+        set { _damage = value; }
+    }
+
+    public void SetDamage(int damage)
+    {
+        _damage = damage;
     }
 
     public void DestroyBullet()
