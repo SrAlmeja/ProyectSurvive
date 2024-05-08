@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 3347561865325240582}
   - component: {fileID: 3964808030688996741}
   - component: {fileID: 7843945033817569796}
+  - component: {fileID: -1567900632441761799}
   - component: {fileID: 8635002810129740486}
   m_Layer: 8
   m_Name: Enemy
@@ -100,7 +101,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyData: {fileID: 11400000, guid: 4ca41963ee8ff9b4cbab8c369cf8ce71, type: 2}
-  DummyTarget: {fileID: 0}
+  DummyTarget: {fileID: 3636530066619232707, guid: c6f3cdeae88a79a4b96317f42a09967b, type: 3}
 --- !u!114 &7843945033817569796
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -114,6 +115,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _animator: {fileID: 23037711867481130}
+--- !u!114 &-1567900632441761799
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6382914310720785933}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 770bce9a12a9fac43ba5c8a35e5fd117, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!195 &8635002810129740486
 NavMeshAgent:
   m_ObjectHideFlags: 0

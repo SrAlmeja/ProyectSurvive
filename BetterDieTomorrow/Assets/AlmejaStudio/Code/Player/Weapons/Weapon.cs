@@ -11,8 +11,7 @@ public class Weapon : MonoBehaviour
     
     private void Start()
     {
-        // Ejemplo de cómo acceder a los datos del arma actual
-        Debug.Log("Current Gun Name: " + Guns[currentGunIndex].name);
+        //Debug.Log("Current Gun Name: " + Guns[currentGunIndex].name);
     }
     
     public void ChangeWeapon()

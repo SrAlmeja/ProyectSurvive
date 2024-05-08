@@ -39,7 +39,7 @@ public class EnemyLogic : MonoBehaviour
         }
     }
 
-    private void FixedUpdate()
+    /*private void FixedUpdate()
     {
         if (!isDead)
         {
@@ -50,7 +50,7 @@ public class EnemyLogic : MonoBehaviour
             StopEnemy();
         }
         
-    }
+    }*/
 
     public void ReciveDamage()
     {
