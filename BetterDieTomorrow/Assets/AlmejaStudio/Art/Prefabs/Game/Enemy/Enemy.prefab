@@ -11,6 +11,8 @@ GameObject:
   - component: {fileID: 1571454684950655662}
   - component: {fileID: 8964575566469952458}
   - component: {fileID: 3347561865325240582}
+  - component: {fileID: 3964808030688996741}
+  - component: {fileID: 7843945033817569796}
   m_Layer: 8
   m_Name: Enemy
   m_TagString: Enemy
@@ -49,7 +51,7 @@ CapsuleCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
@@ -84,6 +86,32 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &3964808030688996741
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6382914310720785933}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 038f8d287f5db9b46b849dc84bc2c407, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemyData: {fileID: 11400000, guid: 4ca41963ee8ff9b4cbab8c369cf8ce71, type: 2}
+--- !u!114 &7843945033817569796
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6382914310720785933}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2f68c913372fd6d4383375a8f50c4b1c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _animator: {fileID: 23037711867481130}
 --- !u!1001 &9173823365062534217
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -445,6 +473,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c25ecc65e2662d6468bcba4b42a1ab5e, type: 3}
+--- !u!95 &23037711867481130 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: -63561583620020125, guid: c25ecc65e2662d6468bcba4b42a1ab5e, type: 3}
+  m_PrefabInstance: {fileID: 9173823365062534217}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &7628673017683467479 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1626232734065784990, guid: c25ecc65e2662d6468bcba4b42a1ab5e, type: 3}

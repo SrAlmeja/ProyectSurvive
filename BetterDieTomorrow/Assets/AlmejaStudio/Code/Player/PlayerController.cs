@@ -5,6 +5,11 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    private int _initialHealth;
+    private int _currentHealth;
+    private int _coldDown;
+    private bool _isOnColdDown;
+    
     #region InputVariables
 
     private Rigidbody _rigidbodyPlayer;
@@ -137,5 +142,25 @@ public class PlayerController : MonoBehaviour
     public void SetMovement(Vector2 movement)
     {
         _movement = movement;
+    }
+    
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Enemy"))
+        {
+            EnemyLogic enemyLogic = other.GetComponent<EnemyLogic>();
+            ReciveDamage(enemyLogic.Damage);
+        }
+    }
+
+
+    public void ReciveDamage(int damage)
+    {
+        Debug.Log("El Enemy Me golpea" + damage);
+    }
+
+    public void Die()
+    {
+        
     }
 }
