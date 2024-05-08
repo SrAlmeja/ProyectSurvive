@@ -30,6 +30,7 @@ public class PlayerController : MonoBehaviour
 
     [Header("SecundaryWeapon")]
     [SerializeField] GameObject secundaryWeapon;
+    private Weapon _weapon;
     private bool _weaponEquipped = false;
     private AnimationStateController _animStateController;
 
@@ -54,6 +55,7 @@ public class PlayerController : MonoBehaviour
         _rigidbodyPlayer = GetComponent<Rigidbody>();
         _animStateController = GetComponent<AnimationStateController>();
         _animStateController.Animator = GetComponentInChildren<Animator>();
+        _weapon = GetComponent<Weapon>();
         
         secundaryWeapon.SetActive(false);
         _crosshair = Instantiate(crosshairprefab);
@@ -84,12 +86,14 @@ public class PlayerController : MonoBehaviour
     {
         if (_weaponEquipped)
         {
+            _weapon.ChangeWeapon();
             _weaponEquipped = false;
             secundaryWeapon.SetActive(false);
             _animStateController.ChangeWeapon();
         }
         else
         {
+            _weapon.ChangeWeapon();
             _weaponEquipped = true;
             secundaryWeapon.SetActive(true);
             _animStateController.ChangeWeapon();
@@ -99,8 +103,7 @@ public class PlayerController : MonoBehaviour
 
     public void Shoot()
     {
-        _gunSelector.ActiveGun.Shoot();
-        _gunSelector.ActiveGun.Shoot();
+        
     }
     private void Laser()
     {

@@ -13,7 +13,7 @@ public class PlayerGunSelector : MonoBehaviour
     //[SerializeField] private PlayerIK InverseKinemarics;
     [Header("Runtime Filled")] public SOGun ActiveGun;
 
-    private void Start()
+    /*private void Start()
     {
         SOGun gun = Guns.Find(gun => gun.Type == weapon);
         if (gun == null)
@@ -23,5 +23,5 @@ public class PlayerGunSelector : MonoBehaviour
 
         ActiveGun = gun;
         gun.Spawn(weaponParent, this);
-    }
+    }*/
 }
