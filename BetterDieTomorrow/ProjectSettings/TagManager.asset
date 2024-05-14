@@ -9,6 +9,7 @@ TagManager:
   - Buildings
   - Enemy
   - Bullet
+  - Bait
   layers:
   - Default
   - TransparentFX
