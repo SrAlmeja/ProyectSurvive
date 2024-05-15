@@ -22,8 +22,6 @@ public class EnemysDevicer : MonoBehaviour
     
     private void Start()
     {
-        LeanPool.Despawn(devicerPrefab);
-
         for (int i = 0; i < poolSize - 1; i++)
         {
             SpawnFromPool();
@@ -42,5 +40,10 @@ public class EnemysDevicer : MonoBehaviour
         SetARange();
         LeanPool.Spawn(devicerPrefab, _spawnPosition, Quaternion.identity, parentRef.transform);
         devicerPrefab.SetActive(false);
+    }
+    
+    public void ReturnToPool(GameObject obj)
+    {
+        LeanPool.Despawn(obj);
     }
 }
